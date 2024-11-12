@@ -13,9 +13,9 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
         lgBlue: "#009EDD",
-        darkBlue: "#0073A1",
+        purpleBg: "#0F1330",
         green: "#039B00",
-        gray: "#D9D9D9",
+        gray: "#6D6E80",
         textColor: "#2F2E41",
         darkGray: "#999999"
       },
