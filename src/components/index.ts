@@ -1,1 +1,2 @@
 export { default as PrimaryButton } from "./Buttons/PrimaryButton"
+export { default as SecondaryButton } from "./Buttons/SecondaryButton"
