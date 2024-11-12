@@ -40,6 +40,11 @@ const config: Config = {
           '-o-user-drag': 'none',
           'user-drag': 'none',
         },
+        '.transition-3s': {
+          'transition-property': 'all',
+          'transition-duration': '0.3s',
+          'transition-timing-function': 'ease',
+        },
       });
     }),
   ],
