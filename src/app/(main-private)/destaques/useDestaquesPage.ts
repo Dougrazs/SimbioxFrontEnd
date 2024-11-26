@@ -1,9 +1,10 @@
 
+import { API_URL } from '@/constants/urls';
 import { useQuery } from '@tanstack/react-query';
 
 export const useDestaquesPage = () => {
   async function fetchPopularMovies() {
-    const response = await fetch('http://localhost:3005/api/popular');
+    const response = await fetch(`${API_URL}/popular`);
     const data = await response.json();
     return data;
   }

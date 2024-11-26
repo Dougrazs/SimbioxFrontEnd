@@ -1,8 +1,6 @@
-export { default as PrimaryButton } from "./Buttons/PrimaryButton"
 export { default as SecondaryButton } from "./Buttons/SecondaryButton"
 export { default as TextButton } from "./Buttons/TextButton"
 export { default as FavoriteButton } from './Buttons/FavoriteButton'
-export { default as Select } from './Select'
 
 export { default as VerticalCard } from "./MovieCard"
 export { default as VoteSpan } from './VoteSpan'

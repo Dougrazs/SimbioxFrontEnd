@@ -16,11 +16,11 @@ const initialState = {
 };
 
 export default function SignIn() {
-  const { loading, error, handleIsSignup, isSignup } = useSignin();
+  const { loading, handleIsSignup, isSignup } = useSignin();
   const router = useRouter();
 
   const [generalFeedback, setGeneralFeedback] = useState<string | null>(null); // For success or general messages.
-  const [state, action, pending] = useActionState<SignupState, FormDataLike>(
+  const [state, action,] = useActionState<SignupState, FormDataLike>(
     async (state, formData) => {
       const result = isSignup
         ? await signup(state, formData, isSignup)

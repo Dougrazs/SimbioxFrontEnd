@@ -1,6 +1,7 @@
 import { IMovie } from '@/types/moviesTypes';
 import React, { createContext, useContext, useMemo } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { API_URL } from '@/constants/urls';
 
 interface FavoritesContextType {
   favorites: Array<IMovie>;
@@ -21,7 +22,7 @@ export const FavoritesContextProvider = ({ children }: { children: React.ReactNo
   const queryClient = useQueryClient();
 
   const fetchFavoriteMovies = async (userId: string): Promise<Array<IMovie>> => {
-    const response = await fetch(`http://localhost:3005/api/user/${userId}/favorites`);
+    const response = await fetch(`${API_URL}/user/${userId}/favorites`);
     if (!response.ok) {
       throw new Error('Failed to fetch movies');
     }
@@ -48,7 +49,7 @@ export const FavoritesContextProvider = ({ children }: { children: React.ReactNo
 
   const removeMovieFromFavorites = useMutation<void, Error, MovieMutationVariables>({
     mutationFn: async ({ movieId }) => {
-      const response = await fetch(`http://localhost:3005/api/user/${user._id}/favorites/${movieId}`, {
+      const response = await fetch(`${API_URL}/user/${user._id}/favorites/${movieId}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
       });
@@ -67,7 +68,7 @@ export const FavoritesContextProvider = ({ children }: { children: React.ReactNo
 
   const addMovieToFavorites = useMutation<void, Error, MovieMutationVariables>({
     mutationFn: async ({ movieId }) => {
-      const response = await fetch(`http://localhost:3005/api/user/${user._id}/favorites/${movieId}`, {
+      const response = await fetch(`${API_URL}/user/${user._id}/favorites/${movieId}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId, movieId }),

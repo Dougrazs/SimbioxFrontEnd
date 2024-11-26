@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { API_URL } from './constants/urls';
 
 export async function middleware(req: NextRequest) {
   const token = req.cookies.get('auth_token_simbiox')?.value;
@@ -10,7 +11,7 @@ export async function middleware(req: NextRequest) {
 
   try {
 
-    const response = await fetch('http://localhost:3005/api/protectedroute', {
+    const response = await fetch(`${API_URL}/protectedroute`, {
       method: 'POST',
       credentials: 'include',
       headers: {

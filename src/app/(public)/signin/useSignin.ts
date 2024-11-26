@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { API_URL } from "@/constants/urls";
 
 export const useSignin = () => {
   const [loading, setLoading] = useState(true);
@@ -19,7 +20,7 @@ export const useSignin = () => {
 
     const validateToken = async () => {
       try {
-        const response = await fetch('http://localhost:3005/api/protectedroute', {
+        const response = await fetch(`${API_URL}/protectedroute`, {
           method: 'POST',
           credentials: 'include',
           headers: {

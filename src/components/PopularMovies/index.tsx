@@ -6,7 +6,7 @@ import 'swiper/css/pagination';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import { IPopularMovie } from '@/types/popularMovieTypes';
-import { TextButton, FavoriteButton, VoteSpan } from '@/components';
+import { FavoriteButton, VoteSpan } from '@/components';
 import { useFavoritesContext } from '@/contexts/FavoriteContext';
 import { useSwiperControllers } from '@/hooks';
 import { IMAGE_URLS } from '@/constants/urls'

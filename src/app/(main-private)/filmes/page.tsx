@@ -1,6 +1,6 @@
 'use client'
 import { useFilmes } from './useFilmes'
-import { Input, PrimaryButton, Select, Spinner, TextButton, VerticalCard } from "@/components";
+import { Input, Spinner, VerticalCard } from "@/components";
 import PaginationSearch from '@/components/Pagination';
 import { IMovie } from "@/types/moviesTypes";
 

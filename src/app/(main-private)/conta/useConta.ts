@@ -3,6 +3,7 @@ import { useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { IUser } from '@/types/userType';
 import { useQueryClient } from '@tanstack/react-query';
+import { API_URL } from '@/constants/urls';
 export const useConta = (user: IUser) => {
   const router = useRouter();
   const userId = user?._id;
@@ -22,7 +23,7 @@ export const useConta = (user: IUser) => {
           throw new Error('User ID is required');
         }
 
-        const response = await fetch(`http://localhost:3005/api/user/${userId}`);
+        const response = await fetch(`${API_URL}/user/${userId}`);
         if (!response.ok) {
           throw new Error('Failed to fetch user');
         }
@@ -44,7 +45,7 @@ export const useConta = (user: IUser) => {
 
 
   const handleDeleteAccount = async () => {
-    const response = await fetch('http://localhost:3005/api/user/delete', {
+    const response = await fetch(`${API_URL}/user/delete`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -59,7 +60,7 @@ export const useConta = (user: IUser) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:3005/api/user/update', {
+      const response = await fetch(`${API_URL}/user/update`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

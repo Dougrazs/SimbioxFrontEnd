@@ -1,3 +1,4 @@
+import { API_URL } from "@/constants/urls";
 import { singinSingupFormSchema } from "@/lib/schema";
 
 export type SignupState = {
@@ -31,7 +32,7 @@ export async function signin(
   const { email: validEmail } = validationResult.data;
 
   try {
-    const response = await fetch("http://localhost:3005/api/login", {
+    const response = await fetch(`${API_URL}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -45,7 +46,6 @@ export async function signin(
       };
     }
 
-    const responseData = await response.json();
 
     return {
       errors: {},
@@ -80,7 +80,7 @@ export async function signup(
   const { email: validEmail, name: validName } = validationResult.data;
 
   try {
-    const response = await fetch("http://localhost:3005/api/user/signup", {
+    const response = await fetch(`${API_URL}/user/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

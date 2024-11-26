@@ -1,6 +1,7 @@
 import { IMovie } from "@/types/moviesTypes";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
+import { API_URL } from '@/constants/urls'
 
 export const useFilmes = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -9,7 +10,7 @@ export const useFilmes = () => {
 
   const fetchMovies = async (): Promise<{ results: IMovie[]; total_pages: number }> => {
     const response = await fetch(
-      `http://localhost:3005/api/movies/search?query=${searchTerm}&page=${currentPage}`
+      `${API_URL}/movies/search?query=${searchTerm}&page=${currentPage}`
     );
     if (!response.ok) throw new Error("Failed to fetch movies");
     return response.json();
