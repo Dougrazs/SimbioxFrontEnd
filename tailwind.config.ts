@@ -14,13 +14,17 @@ const config: Config = {
         foreground: "var(--foreground)",
         lgBlue: "#009EDD",
         purpleBg: "#0F1330",
-        green: "#039B00",
+        simbioxGreen: "#21C565",
         gray: "#6D6E80",
         textColor: "#2F2E41",
         darkGray: "#999999"
       },
       width: {
-        'w-81': '21rem'
+        '81': '21rem',
+        '100': '32rem'
+      },
+      height: {
+        '25': "25rem"
       },
       fontFamily: {
         sans: ['Open Sans', 'sans-serif'],
@@ -45,6 +49,10 @@ const config: Config = {
           'transition-duration': '0.3s',
           'transition-timing-function': 'ease',
         },
+        '.center-absolute': {
+          'transform': 'translate(-50%, 0)',
+          'left': '50%'
+        }
       });
     }),
   ],

@@ -1,16 +1,26 @@
-import { IButtonProps } from "@/types/buttonsType";
+import React, { forwardRef } from 'react';
+import { ISecondaryButtonProps } from "@/types/buttonsType";
 
-export default function TextButton({ children }: IButtonProps) {
+const TextButton = forwardRef<HTMLButtonElement, ISecondaryButtonProps>(({ children, active, ...props }, ref) => {
   return (
-    <button className="transition-3s 
-    active:opacity-100 
-    hover:opacity-50 flex items-center gap-2
-    py-2 px-5 border-b
-   border-gray
-    decoration-gray">
-      <p className={"border-b text-gray"}>
+    <button
+      ref={ref}
+      className="transition-3s 
+      active:opacity-100 
+      hover:opacity-50 
+      text-start
+      border-b
+      border-gray
+      decoration-gray"
+      {...props}
+    >
+      <p className={`hover:text-gray text-gray text-center ${active && 'text-white'}`}>
         {children}
       </p>
     </button>
   );
-}
+});
+
+TextButton.displayName = 'TextButton';
+
+export default TextButton;

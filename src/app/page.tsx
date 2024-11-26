@@ -1,12 +1,18 @@
-import { MovieCard, BoxContainer } from "@/components";
-export default function Home() {
-  return (
-    <div>
-      <BoxContainer>
-        {/* <h1>TESTE</h1> */}
-        <MovieCard />
-      </BoxContainer>
+import { redirect } from 'next/navigation';
 
-    </div>
+const Admin = () => {
+  const isAuth = false
+  if (!isAuth) {
+    redirect('/signin');
+  }
+
+  return (
+    <main className="text-center h-screen flex justify-center items-center">
+      <div>
+        <h1>Admin Page</h1>
+      </div>
+    </main>
   );
-}
+};
+
+export default Admin;
