@@ -25,6 +25,7 @@ export const useSignin = () => {
           credentials: 'include',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
           },
         });
 
@@ -35,11 +36,12 @@ export const useSignin = () => {
         const data = await response.json();
         localStorage.setItem('user', JSON.stringify(data?.user));
 
-        router.push('/destaques');
+
       } catch (err) {
         setError(err instanceof Error ? err.message : 'An unknown error occurred');
       } finally {
         setLoading(false);
+        router.push('/destaques');
       }
     };
 
