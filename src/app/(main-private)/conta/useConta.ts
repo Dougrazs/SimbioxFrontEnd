@@ -53,6 +53,9 @@ export const useConta = (user: IUser) => {
       body: JSON.stringify({ name: form.name, email: form.email }),
     });
 
+    document.cookie = 'auth_token_simbiox=; Max-Age=0; path=/;'
+    localStorage.removeItem('user');
+    router.push('/signin');
     return response;
   };
 
@@ -75,7 +78,7 @@ export const useConta = (user: IUser) => {
         throw new Error('Failed to update the account');
       }
       queryClient.invalidateQueries({ queryKey: ['user', userId] });
-      localStorage.removeItem('user');
+
       router.push('/signin');
     } catch (error) {
       console.error('Error updating account:', error);
@@ -84,6 +87,7 @@ export const useConta = (user: IUser) => {
 
   const handleLogout = () => {
     localStorage.removeItem('user');
+    document.cookie = 'auth_token_simbiox=; Max-Age=0; path=/;'
     router.push('/signin');
   };
 
