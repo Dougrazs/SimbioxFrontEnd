@@ -16,7 +16,7 @@ export default function Filmes() {
 
   return (
     <div className="flex flex-col items-center gap-5">
-      <form onSubmit={onSubmit} className="w-auto flex gap-5">
+      <form onSubmit={onSubmit} className="w-50 md:w-auto flex gap-5">
         <Input
           placeholder="Pesquisa..."
           value={searchTerm}
@@ -25,7 +25,7 @@ export default function Filmes() {
         <button className={'bg-slate-50 rounded-md p-2 font-semibold text-black hover:opacity-50 active:opacity-100 transition-3s'} type={'submit'}>Buscar</button>
       </form>
 
-      <div className="w-full h-[78vh] md:h-[75vh] overflow-auto">
+      <div className="w-full h-[73vh] md:h-[75vh] sm:h-[50vh] overflow-auto">
         {isFetching || isLoading ? (
           <div className="w-full flex items-center justify-center">
             <Spinner />

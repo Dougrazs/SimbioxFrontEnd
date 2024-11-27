@@ -13,7 +13,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import arrowBack from '@/assets/icons/arrow-back.svg'
 import arrowFoward from '@/assets/icons/arrow-forward.svg'
-
+import { useIsMobileDevice } from '@/hooks';
 interface PopularMoviesProps {
   data: IPopularMovie[];
 }
@@ -21,6 +21,7 @@ interface PopularMoviesProps {
 export default function PopularMovies({ data }: PopularMoviesProps) {
   const { handlePrev, handleNext, sliderRef } = useSwiperControllers()
   const { isFavorite, handleFavoriteMovie, isLoadingFavoriteAction } = useFavoritesContext()
+  const isMobile = useIsMobileDevice()
 
   return (
     <div className="relative w-full">
@@ -49,6 +50,11 @@ export default function PopularMovies({ data }: PopularMoviesProps) {
         modules={[Autoplay, Navigation, Pagination]}
       >
         {data?.map((movie: IPopularMovie) => {
+
+          const backgroundUrl = isMobile
+            ? `${IMAGE_URLS?.url}${movie?.poster_path}`
+            : `${IMAGE_URLS?.url}${movie?.backdrop_path}`;
+
           return (
             <SwiperSlide key={movie.id}>
               <div className="absolute center-absolute z-30 bg-black bg-opacity-30 p-3 rounded-xl bottom-20 flex flex-col items-center md:items-start gap-2 md:left-[5rem] md:translate-x-0 text-white">
@@ -73,11 +79,11 @@ export default function PopularMovies({ data }: PopularMoviesProps) {
               <div
                 className="w-full h-screen"
                 style={{
-                  backgroundImage: `url(${IMAGE_URLS?.url}${movie?.backdrop_path})`,
+                  backgroundImage: `url(${backgroundUrl})`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                   backgroundAttachment: 'fixed',
-                  height: '85vh',
+                  height: isMobile ? '75vh' : '80vh',
                   filter: 'brightness(75%)',
                   backgroundBlendMode: 'overlay',
                   overflow: 'hidden',

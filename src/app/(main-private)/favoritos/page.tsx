@@ -19,7 +19,7 @@ export default function Favoritos() {
     </div>)
   }
   return (
-    <div className="w-full h-[90vh] overflow-auto">
+    <div className="w-full h-[80vh] md:h-[90vh] overflow-auto">
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 overflow-hidden">
         {favorites?.map((movie, index) => (
           <div key={index} className="flex justify-center w-full h-full">

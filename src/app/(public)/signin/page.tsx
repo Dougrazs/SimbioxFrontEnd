@@ -1,6 +1,6 @@
 'use client';
 
-import { Input } from "@/components";
+import { Input, TextButton } from "@/components";
 import { signin, signup, SignupState, FormDataLike } from './actions';
 import { useActionState } from 'react';
 import { useSignin } from "./useSignin";
@@ -60,7 +60,7 @@ export default function SignIn() {
               <>
                 <div className="flex flex-col">
                   <label htmlFor="name">Name</label>
-                  <Input id="name" name="name" placeholder="Your Name" />
+                  <Input id="name" name="name" placeholder="Seu nome" />
                 </div>
                 {state.errors.name && <p className="text-red-500">{state.errors.name.join(", ")}</p>}
               </>
@@ -68,11 +68,11 @@ export default function SignIn() {
           </div>
         </div>
         <div className="flex flex-col items-center gap-8">
-          <button type="submit">{isSignup ? "Cadastrar" : "Entrar"}</button>
-          {!isSignup && <h4>ou crie um cadastro</h4>}
-          <button type="button" onClick={handleIsSignup}>
+          <button className="p-3 bg-white text-purpleBg rounded-md hover:opacity-50 active:opacity-100 transition-3s" type="submit">{isSignup ? "Cadastrar" : "Entrar"}</button>
+          {!isSignup && <h4 className={'opacity-50'}>ou crie um cadastro</h4>}
+          <TextButton active={true} type="button" onClick={handleIsSignup}>
             {isSignup ? "Voltar para tela de login" : "Cadastro"}
-          </button>
+          </TextButton>
         </div>
         {generalFeedback && (
           <div className="mt-4 text-center">
