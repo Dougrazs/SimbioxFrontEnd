@@ -25,7 +25,7 @@ export default function Filmes() {
         <button className={'bg-slate-50 rounded-md p-2 font-semibold text-black hover:opacity-50 active:opacity-100 transition-3s'} type={'submit'}>Buscar</button>
       </form>
 
-      <div className="w-full h-[73vh] md:h-[75vh] sm:h-[50vh] overflow-auto">
+      <div className="w-full h-[73vh] md:h-[80vh] sm:h-[50vh] overflow-auto">
         {isFetching || isLoading ? (
           <div className="w-full flex items-center justify-center">
             <Spinner />

@@ -10,7 +10,7 @@ export async function middleware(req: NextRequest) {
 
     if (referer) {
       const url = new URL(referer);
-      token = url.searchParams.get('token'); // Get the token from the query params of the referer
+      token = url.searchParams.get('token');
     }
   }
 
@@ -41,13 +41,12 @@ export async function middleware(req: NextRequest) {
 
     res.cookies.set('auth_token_simbiox', token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
+      secure: true,
+      sameSite: 'none',
       maxAge: 360000,
       path: '/',
     });
 
-    console.log('Token validated and cookie set');
     return res;
   } catch (error) {
     console.error('Error validating token:', error);

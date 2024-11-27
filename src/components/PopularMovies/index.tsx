@@ -57,17 +57,17 @@ export default function PopularMovies({ data }: PopularMoviesProps) {
 
           return (
             <SwiperSlide key={movie.id}>
-              <div className="absolute center-absolute z-30 bg-black bg-opacity-30 p-3 rounded-xl bottom-20 flex flex-col items-center md:items-start gap-2 md:left-[5rem] md:translate-x-0 text-white">
+              <div className="absolute center-absolute z-30 bg-purpleBg bg-opacity-80 md:bg-opacity-75 p-3 rounded-xl bottom-20 flex flex-col items-center md:items-start gap-2 md:left-[5rem] md:translate-x-0 text-white">
                 <div className={'flex flex-col gap-2 text-center md:text-start'}>
                   <h2 className="text-lg font-bold md:text-5xl" >{movie.title}</h2>
-                  <h3 className="text-sm opacity-60 hidden md:block">{movie.genres}</h3>
-                  <h3 className="text-sm opacity-60 hidden md:block">{movie.release_date.split('-')[0]}</h3>
+                  <h3 className="text-sm opacity-80 hidden md:block">{movie.genres}</h3>
+                  <h3 className="text-sm opacity-80 hidden md:block">{movie.release_date.split('-')[0]}</h3>
                 </div>
 
                 <p className="hidden md:block text-lm max-w-lg line-clamp-5 overflow-auto h-20">
                   {movie.overview}
                 </p>
-                <Link className={'text-gray hover:opacity-50 select-none transition-3s active:opacity-100 text-center'} href={`/filmes/${movie.id}`}>
+                <Link className={'text-white underline hover:opacity-50 select-none transition-3s active:opacity-100 text-center'} href={`/filmes/${movie.id}`}>
                   Mais Informações
                 </Link>
               </div>
@@ -83,8 +83,8 @@ export default function PopularMovies({ data }: PopularMoviesProps) {
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                   backgroundAttachment: 'fixed',
-                  height: isMobile ? '75vh' : '80vh',
-                  filter: 'brightness(75%)',
+                  height: isMobile ? '75vh' : '90vh',
+                  filter: 'brightness(70%)',
                   backgroundBlendMode: 'overlay',
                   overflow: 'hidden',
                 }}
