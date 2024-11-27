@@ -40,5 +40,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/filmes', '/filmes/:path*', '/destaques', '/favoritos', '/minhaconta'],
+  matcher: ['/filmes', '/filmes/:path*', '/destaques', '/favoritos', '/conta'],
 };
