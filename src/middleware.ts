@@ -7,7 +7,6 @@ export async function middleware(req: NextRequest) {
 
   if (!token) {
     const referer = req.headers.get('referer');
-
     if (referer) {
       const url = new URL(referer);
       token = url.searchParams.get('token');
@@ -43,10 +42,11 @@ export async function middleware(req: NextRequest) {
       httpOnly: true,
       secure: true,
       sameSite: 'none',
-      maxAge: 360000,
+      maxAge: 24 * 60 * 60 * 1000,
       path: '/',
     });
 
+    console.log('Cookies setup')
     return res;
   } catch (error) {
     console.error('Error validating token:', error);
