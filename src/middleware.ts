@@ -3,15 +3,20 @@ import type { NextRequest } from 'next/server';
 import { API_URL } from './constants/urls';
 
 export async function middleware(req: NextRequest) {
-  let token: string | null | undefined = req.cookies.get('auth_token_simbiox')?.value;
+  const tokenFromCookie = req.cookies.get('auth_token_simbiox')?.value;
 
-  if (!token) {
-    const referer = req.headers.get('referer');
-    if (referer) {
-      const url = new URL(referer);
-      token = url.searchParams.get('token');
+  const setToken = (): string | null | undefined => {
+    if (!tokenFromCookie) {
+      const referer = req.headers.get('referer');
+      if (referer) {
+        const url = new URL(referer);
+        const tokenFromRef = url.searchParams.get('token');
+        return tokenFromRef
+      }
     }
+    return tokenFromCookie
   }
+  const token = setToken()
 
   if (!token) {
     return NextResponse.redirect(new URL('/signin', req.url));
@@ -46,7 +51,6 @@ export async function middleware(req: NextRequest) {
       path: '/',
     });
 
-    console.log('Cookies setup')
     return res;
   } catch (error) {
     console.error('Error validating token:', error);

@@ -32,7 +32,7 @@ export const useSignin = () => {
         if (!response.ok) {
           throw new Error('Token validation failed');
         }
-
+        console.log('passou o token: ', { token })
         const data = await response.json();
         localStorage.setItem('user', JSON.stringify(data?.user));
         router.push('/destaques');
