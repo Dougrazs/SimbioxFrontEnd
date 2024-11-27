@@ -3,9 +3,9 @@ import type { NextRequest } from 'next/server';
 import { API_URL } from './constants/urls';
 
 export async function middleware(req: NextRequest) {
-  const tokenFromCookie = req.cookies.get('auth_token_simbiox')?.value;
 
   const setToken = (): string | null | undefined => {
+    const tokenFromCookie = req.cookies.get('auth_token_simbiox')?.value;
     if (!tokenFromCookie) {
       const referer = req.headers.get('referer');
       if (referer) {
@@ -41,8 +41,8 @@ export async function middleware(req: NextRequest) {
       console.error('Error validating token:', response.statusText, { token });
       return NextResponse.redirect(new URL('/signin', req.url));
     }
-    const res = NextResponse.next();
 
+    const res = NextResponse.next();
     res.cookies.set('auth_token_simbiox', token, {
       httpOnly: true,
       secure: true,
@@ -50,7 +50,6 @@ export async function middleware(req: NextRequest) {
       maxAge: 24 * 60 * 60 * 1000,
       path: '/',
     });
-
     return res;
   } catch (error) {
     console.error('Error validating token:', error);
