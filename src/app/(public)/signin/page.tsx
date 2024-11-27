@@ -48,7 +48,7 @@ export default function SignIn() {
 
   return (
     <div className="h-full w-full flex items-center justify-center">
-      <form action={action} className="w-100 h-100 items-center bg-purpleBg p-8 rounded-md m-auto flex flex-col gap-5 transition-3s">
+      <form action={action} className="w-100 h-[100%] justify-center md:h-auto items-center bg-purpleBg p-8 rounded-md m-auto flex flex-col gap-5 transition-3s">
         <div className="flex flex-col items-center align-center gap-10">
           <div className="flex flex-col gap-8">
             <div className="flex flex-col">
@@ -68,7 +68,7 @@ export default function SignIn() {
           </div>
         </div>
         <div className="flex flex-col items-center gap-8">
-          <button className="p-3 bg-white text-purpleBg rounded-md hover:opacity-50 active:opacity-100 transition-3s" type="submit">{isSignup ? "Cadastrar" : "Entrar"}</button>
+          <button className="p-3 font-semibold bg-white text-purpleBg rounded-md hover:opacity-50 active:opacity-100 transition-3s" type="submit">{isSignup ? "Cadastrar" : "Entrar"}</button>
           {!isSignup && <h4 className={'opacity-50'}>ou crie um cadastro</h4>}
           <TextButton active={true} type="button" onClick={handleIsSignup}>
             {isSignup ? "Voltar para tela de login" : "Cadastro"}

@@ -2,12 +2,10 @@
 import { useConta } from "./useConta";
 
 export default function MinhaConta() {
-
-
   const { handleDeleteAccount, handleLogout, handleUpdate, handleInputChange, form } = useConta();
 
   return (
-    <form className={'w-full bg-purpleBg flex flex-col items-center p-5 rounded-md gap-10'}>
+    <form className={'w-full h-full bg-black md:bg-purpleBg flex flex-col items-center p-5 rounded-md gap-10'}>
       <div className={'flex flex-col'}>
         <label htmlFor='nameInput'>Nome do usuário</label>
         <input

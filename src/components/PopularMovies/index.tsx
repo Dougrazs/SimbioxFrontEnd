@@ -57,7 +57,7 @@ export default function PopularMovies({ data }: PopularMoviesProps) {
 
           return (
             <SwiperSlide key={movie.id}>
-              <div className="absolute center-absolute z-30 bg-purpleBg bg-opacity-80 md:bg-opacity-75 p-3 rounded-xl bottom-20 flex flex-col items-center md:items-start gap-2 md:left-[5rem] md:translate-x-0 text-white">
+              <div className="absolute center-absolute z-30 bg-purpleBg bg-opacity-90 md:bg-opacity-80 p-3 rounded-md bottom-14 flex flex-col items-center md:items-start gap-2 md:left-[5rem] md:translate-x-0 text-white">
                 <div className={'flex flex-col gap-2 text-center md:text-start'}>
                   <h2 className="text-lg font-bold md:text-5xl" >{movie.title}</h2>
                   <h3 className="text-sm opacity-80 hidden md:block">{movie.genres}</h3>
