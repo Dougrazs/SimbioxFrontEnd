@@ -4,13 +4,15 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
-import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import { IPopularMovie } from '@/types/popularMovieTypes';
 import { FavoriteButton, VoteSpan } from '@/components';
 import { useFavoritesContext } from '@/contexts/FavoriteContext';
 import { useSwiperControllers } from '@/hooks';
 import { IMAGE_URLS } from '@/constants/urls'
 import Link from 'next/link';
+import Image from 'next/image';
+import arrowBack from '@/assets/icons/arrow-back.svg'
+import arrowFoward from '@/assets/icons/arrow-forward.svg'
 
 interface PopularMoviesProps {
   data: IPopularMovie[];
@@ -26,7 +28,8 @@ export default function PopularMovies({ data }: PopularMoviesProps) {
         onClick={handlePrev}
         className="absolute bg-white left-0 h-full z-30 transition-all bg-opacity-5 px-3 hover:opacity-50 active:opacity-100"
       >
-        <IoIosArrowBack size={24} />
+        <Image alt="voltar" width={24} src={arrowBack} />
+
       </button>
 
       <Swiper
@@ -89,7 +92,7 @@ export default function PopularMovies({ data }: PopularMoviesProps) {
         onClick={handleNext}
         className="absolute bg-white right-0 top-0 h-full z-30 transition-all bg-opacity-5 px-3 hover:opacity-50 active:opacity-100"
       >
-        <IoIosArrowForward size={24} />
+        <Image alt="avançar" width={24} src={arrowFoward} />
       </button>
     </div>
   );
