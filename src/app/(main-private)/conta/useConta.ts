@@ -4,7 +4,27 @@ import { useQuery } from '@tanstack/react-query';
 import { IUser } from '@/types/userType';
 import { useQueryClient } from '@tanstack/react-query';
 import { API_URL } from '@/constants/urls';
-export const useConta = (user: IUser) => {
+export const useConta = () => {
+  const [user, setUser] = useState<IUser | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+      const storedUser = localStorage.getItem('user');
+      if (storedUser) {
+        try {
+          const parsedUser: IUser = JSON.parse(storedUser);
+          setUser(parsedUser);
+        } catch (error) {
+          console.error('Error parsing user from localStorage', error);
+          setUser(null);
+        }
+      } else {
+        setUser(null);
+      }
+    }
+  }, []);
+
+
   const router = useRouter();
   const userId = user?._id;
   const queryClient = useQueryClient();

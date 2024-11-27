@@ -1,15 +1,10 @@
 'use client'
-
-import { useMemo } from "react";
 import { useConta } from "./useConta";
 
 export default function MinhaConta() {
-  const user = useMemo(() => {
-    const data = localStorage?.getItem('user') ?? '';
-    return JSON?.parse(data);
-  }, []);
 
-  const { handleDeleteAccount, handleLogout, handleUpdate, handleInputChange, form } = useConta(user);
+
+  const { handleDeleteAccount, handleLogout, handleUpdate, handleInputChange, form } = useConta();
 
   return (
     <form className={'w-full bg-purpleBg flex flex-col items-center p-5 rounded-md gap-10'}>
