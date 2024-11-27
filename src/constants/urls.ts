@@ -4,7 +4,7 @@ export const IMAGE_URLS = {
 
 const API_URLS = {
   dev: 'http://localhost:3005/api',
-  prod: 'https://simbioxmoviesbackend-1.onrender.com/api'
+  prod: 'https://simbioxmoviesbackend.onrender.com/api'
 }
 
 export const API_URL = API_URLS.prod
