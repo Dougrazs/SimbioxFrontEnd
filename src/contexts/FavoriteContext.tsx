@@ -1,5 +1,5 @@
 import { IMovie } from '@/types/moviesTypes';
-import React, { createContext, useContext, useMemo } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { API_URL } from '@/constants/urls';
 
@@ -9,7 +9,7 @@ interface FavoritesContextType {
   loadingFavorites: boolean;
   errorFavorites: string | null;
   handleFavoriteMovie: (movieId: number) => void;
-  isLoadingFavoriteAction: boolean; // Add a loading state for adding/removing
+  isLoadingFavoriteAction: boolean;
 }
 
 interface MovieMutationVariables {
@@ -20,6 +20,15 @@ const FavoritesContext = createContext<FavoritesContextType | undefined>(undefin
 
 export const FavoritesContextProvider = ({ children }: { children: React.ReactNode }) => {
   const queryClient = useQueryClient();
+  const [userId, setUserId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const data = localStorage.getItem('user');
+      const parsedUser = data ? JSON.parse(data) : null;
+      setUserId(parsedUser?._id || null);
+    }
+  }, []);
 
   const fetchFavoriteMovies = async (userId: string): Promise<Array<IMovie>> => {
     const response = await fetch(`${API_URL}/user/${userId}/favorites`);
@@ -30,16 +39,10 @@ export const FavoritesContextProvider = ({ children }: { children: React.ReactNo
     return data?.favoriteMovies?.movies ?? [];
   };
 
-  const user = useMemo(() => {
-    const data = localStorage?.getItem('user') ?? '';
-    return JSON?.parse(data);
-  }, []);
-  const userId = user?._id;
-
   const { data: favorites = [], isLoading: loadingFavorites, error } = useQuery({
-    queryKey: ['favoriteMovies', user?._id],
-    queryFn: () => fetchFavoriteMovies(user._id),
-    enabled: !!user?._id,
+    queryKey: ['favoriteMovies', userId],
+    queryFn: () => fetchFavoriteMovies(userId as string),
+    enabled: !!userId, // Only run the query if userId is available
     staleTime: 1000 * 60 * 5,
     refetchOnWindowFocus: true,
     retry: 2,
@@ -49,7 +52,7 @@ export const FavoritesContextProvider = ({ children }: { children: React.ReactNo
 
   const removeMovieFromFavorites = useMutation<void, Error, MovieMutationVariables>({
     mutationFn: async ({ movieId }) => {
-      const response = await fetch(`${API_URL}/user/${user._id}/favorites/${movieId}`, {
+      const response = await fetch(`${API_URL}/user/${userId}/favorites/${movieId}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
       });
@@ -58,9 +61,6 @@ export const FavoritesContextProvider = ({ children }: { children: React.ReactNo
         throw new Error('Failed to remove movie from favorites');
       }
     },
-    onError: (error: Error) => {
-      console.error('Error removing movie from favorites:', error.message);
-    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['favoriteMovies', userId] });
     },
@@ -68,7 +68,7 @@ export const FavoritesContextProvider = ({ children }: { children: React.ReactNo
 
   const addMovieToFavorites = useMutation<void, Error, MovieMutationVariables>({
     mutationFn: async ({ movieId }) => {
-      const response = await fetch(`${API_URL}/user/${user._id}/favorites/${movieId}`, {
+      const response = await fetch(`${API_URL}/user/${userId}/favorites/${movieId}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId, movieId }),
@@ -77,9 +77,6 @@ export const FavoritesContextProvider = ({ children }: { children: React.ReactNo
       if (!response.ok) {
         throw new Error('Failed to add movie to favorites');
       }
-    },
-    onError: (error: Error) => {
-      console.error('Error adding movie to favorites:', error.message);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['favoriteMovies', userId] });
