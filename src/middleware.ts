@@ -3,7 +3,18 @@ import type { NextRequest } from 'next/server';
 import { API_URL } from './constants/urls';
 
 export async function middleware(req: NextRequest) {
-  const token = req.cookies.get('auth_token_simbiox')?.value;
+  let token: string | undefined | null = req?.cookies?.get('auth_token_simbiox')?.value;
+
+  if (!token) {
+    const referer = req.headers.get('referer');
+    if (referer) {
+      const urlParams = new URL(referer).searchParams;
+      token = urlParams.get('token');
+      console.log('THE TOKEN IS SET referer: ', { token })
+    }
+  }
+
+  console.log('THE TOKEN IS SET: ', { token })
 
   if (!token) {
     return NextResponse.redirect(new URL('/signin', req.url));
@@ -29,7 +40,6 @@ export async function middleware(req: NextRequest) {
       console.error('Error validating token:', response.statusText, { token });
       return NextResponse.redirect(new URL('/signin', req.url));
     }
-
 
   } catch (error) {
     console.error('Error validating token:', error);
